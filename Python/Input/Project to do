@@ -1,0 +1,7 @@
+I recommend you run this file first, and then try the following modifications to get more practical experience:
+
+Project 1: Change the input("...") line to take the input as a username instead of a guess, and then print a personalized welcome message.
+
+Project 2: Modify the get_validated_float_input function to only accept integers (whole numbers) by changing float() to int() and seeing how the error message changes.
+
+Project 3: Instead of calculating the mean, add a step to filter the scores list to find how many students scored above 90.
