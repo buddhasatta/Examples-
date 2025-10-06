@@ -1,0 +1,64 @@
+# A class demonstrating Encapsulation using private attributes and public methods.
+
+class BankAccount:
+    """
+    Represents a bank account with secure balance handling.
+    The balance is protected and can only be modified via deposit and withdraw methods.
+    """
+    
+    def __init__(self, initial_balance=0.0):
+        # The '__' prefix is a strong convention in Python to signal 
+        # that this attribute is intended to be private and should not 
+        # be modified directly from outside the class. This is encapsulation.
+        self._balance = initial_balance 
+        print(f"Account created with initial balance: ${self.get_balance():.2f}")
+
+    def deposit(self, amount):
+        """Adds funds to the account balance."""
+        if amount > 0:
+            self._balance += amount
+            print(f"Deposited: ${amount:.2f}. New balance: ${self.get_balance():.2f}")
+        else:
+            print("Error: Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        """Removes funds from the account balance."""
+        if amount <= 0:
+            print("Error: Withdrawal amount must be positive.")
+            return False
+        
+        if amount > self._balance:
+            print(f"Error: Insufficient funds. Available: ${self.get_balance():.2f}. Needed: ${amount:.2f}")
+            return False
+        
+        self._balance -= amount
+        print(f"Withdrew: ${amount:.2f}. New balance: ${self.get_balance():.2f}")
+        return True
+
+    # Abstraction: We expose a simple method to get the balance, 
+    # hiding the internal variable name (_balance) from the user.
+    def get_balance(self):
+        """Returns the current account balance."""
+        return self._balance
+
+# --- Usage Example ---
+print("\n--- Testing Bank Account (Encapsulation) ---")
+
+# 1. Create an account
+my_account = BankAccount(initial_balance=100.00)
+
+# 2. Deposit and withdraw
+my_account.deposit(50.50)
+my_account.withdraw(20.00)
+
+# 3. Attempt invalid operations
+my_account.withdraw(500.00) # Fails due to insufficient funds
+my_account.deposit(-10.00) # Fails due to non-positive amount
+
+# 4. Show final balance
+print(f"Final Account Holder Balance: ${my_account.get_balance():.2f}")
+
+# Note: Accessing my_account._balance directly is technically possible 
+# in Python, but strongly discouraged as it breaks encapsulation:
+# my_account._balance = 9999.00 
+# print(f"Hacker Balance: ${my_account.get_balance():.2f}") # Avoid doing this!
